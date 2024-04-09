@@ -11,16 +11,16 @@ require_once '../../requiered/head.php';
     <center>
         <div id="login-form">
             <h2>Iniciar Sesión</h2>
-            <form>
-                <input type="text" id="login-username" placeholder="Nombre de usuario" required>
-                <input type="password" id="login-password" placeholder="Contraseña" required>
+            <form method="post" action="iniciarSesion.php">
+                <input type="text" name="username" id="login-username" placeholder="Nombre de usuario" required>
+                <input type="password" name="password" id="login-password" placeholder="Contraseña" required>
                 <button type="submit">Iniciar Sesión</button>
             </form>
         </div>
 
         <div id="register-form" style="display:none;">
             <h2>Registrarse</h2>
-            <form method="post"> 
+            <form method="post">
                 <input type="text" name="username" placeholder="Nombre de usuario" required>
                 <input type="text" name="nombre" placeholder="Nombre" required>
                 <input type="text" name="apellido1" placeholder="Primer apellido" required>
@@ -33,29 +33,37 @@ require_once '../../requiered/head.php';
             </form>
         </div>
         <?php
-        include '../../requiered/konexioa.php';
+        require_once '../../requiered/konexioa.php';
 
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['username']) && isset($_POST['password'])) {
             // Recogemos los datos del formulario
-            $nan = $_POST['nan'];
-            $nombre = $_POST['nombre'];
-            $apellido1 = $_POST['apellido1'];
-            $apellido2 = $_POST['apellido2'] ?? '';
-            $telefonoa = $_POST['telefonoa'];
-            $emaila = $_POST['email'];
             $usuarioa = $_POST['username'];
-            $pasahitza = password_hash($_POST['password'], PASSWORD_DEFAULT);
+            $pasahitza = $_POST['password'];
 
             $conn = connection();
 
-            // Preparamos la consulta SQL para insertar los datos sin banku_zenbakia
-            $stmt = $conn->prepare("INSERT INTO bezeroa (NAN, izena, abizena, abizena2, telefonoa, emaila, usuarioa, pasahitza) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-            $stmt->bind_param("ssssssss", $nan, $nombre, $apellido1, $apellido2, $telefonoa, $emaila, $usuarioa, $pasahitza);
+            // Preparamos la consulta SQL para obtener el hash de la contraseña
+            $stmt = $conn->prepare("SELECT pasahitza FROM bezeroa WHERE usuarioa = ?");
+            $stmt->bind_param("s", $usuarioa);
+            $stmt->execute();
+            $stmt->store_result();
 
-            if ($stmt->execute()) {
-                echo "Usuario registrado con éxito.";
+            // Verificamos si se encontró el usuario
+            if ($stmt->num_rows == 1) {
+                $stmt->bind_result($hashed_password);
+                $stmt->fetch();
+
+                // Verificamos si la contraseña es correcta
+                if (password_verify($pasahitza, $hashed_password)) {
+                    // Iniciar sesión aquí
+                    $_SESSION['usuario'] = $usuarioa;
+                    header('Location: ../index/index.php');
+                    exit;
+                } else {
+                    echo "<script>alert('Nombre de usuario o contraseña incorrectos.');</script>";
+                }
             } else {
-                echo "Error al registrar el usuario: " . $stmt->error;
+                echo "<script>alert('Nombre de usuario o contraseña incorrectos.');</script>";
             }
 
             $stmt->close();

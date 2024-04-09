@@ -3,6 +3,9 @@
 
 <head>
     <?php
+    
+    session_start();
+    
     define('APP_DIR', $_SERVER['DOCUMENT_ROOT'] . '/erronka3web'); //Aplikazioaren karpeta edozein lekutatik atzitzeko.
     define('HREF_VIEWS_DIR', '/erronka3web/src/views'); //Aplikazioaren views karpeta edozein lekutatik deitzeko
     define('HREF_SRC_DIR', '/erronka3web/src'); //Aplikazioaren views karpeta edozein lekutatik deitzeko
@@ -32,12 +35,21 @@
             <div class="logo">
                 <img src="../../../public/trio_sabroso_logo-transformed.png" alt="LOGO">
             </div>
+            <?php
+            if ((isset($_SESSION['usuario']))and(($_SESSION['usuario']) != "")) {
+                $usuarioa = $_SESSION["usuario"];
+            }else{
+                $usuarioa = "INICIAR SESIÓN";
+            }
+            ?>
             <div class="menu">
                 <a href="#">Inicio</a>
                 <a href="#">Productos</a>
                 <a href="#">Contacto</a>
-                <button id="sessionButton"><a href="<?= HREF_SRC_DIR ?> /views/iniciarSesion/iniciarSesion.php">INICIAR SESIÓN</a></button>
+                <button id="sessionButton"><a href="<?= HREF_SRC_DIR ?> /views/iniciarSesion/iniciarSesion.php"><?= $usuarioa ?></a></button>
             </div>
+            
+            
         </nav>
         
     </header>
