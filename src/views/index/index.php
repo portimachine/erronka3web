@@ -5,7 +5,7 @@ require_once '../../requiered/head.php';
 <div class="hero">
     <h1>PIDE EN TRIO SABROSO</h1>
     <p>GRATIS EN PEDIDOS SUPERIORES A 30€</p>
-    <button id="orderButton">HAZ TU RESERVA</button>
+    <button id="orderButton"> <a href="../reserva/reserva.php"> TU RESERVA </a></button>
 </div>
 <footer>
     <?php require_once '../../requiered/footer.php'; ?>

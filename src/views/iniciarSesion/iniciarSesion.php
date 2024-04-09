@@ -57,7 +57,7 @@ require_once '../../requiered/head.php';
                 if (password_verify($pasahitza, $hashed_password)) {
                     // Iniciar sesión aquí
                     $_SESSION['usuario'] = $usuarioa;
-                    header('Location: ../index/index.php');
+                    
                     exit;
                 } else {
                     echo "<script>alert('Nombre de usuario o contraseña incorrectos.');</script>";

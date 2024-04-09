@@ -33,7 +33,7 @@
     <header>
         <nav>
             <div class="logo">
-                <img src="../../../public/trio_sabroso_logo-transformed.png" alt="LOGO">
+                <img src="../../public/trio_sabroso_logo-transformed.png" alt="LOGO">
             </div>
             <?php
             if ((isset($_SESSION['usuario']))and(($_SESSION['usuario']) != "")) {
@@ -43,8 +43,8 @@
             }
             ?>
             <div class="menu">
-                <a href="#">Inicio</a>
-                <a href="#">Productos</a>
+                <a href="<?= HREF_SRC_DIR ?> /views/index/index.php">Inicio</a>
+                <a href="<?= HREF_SRC_DIR ?> /views/produktuak/produktuak.php">Productos</a>
                 <a href="#">Contacto</a>
                 <button id="sessionButton"><a href="<?= HREF_SRC_DIR ?> /views/iniciarSesion/iniciarSesion.php"><?= $usuarioa ?></a></button>
             </div>
