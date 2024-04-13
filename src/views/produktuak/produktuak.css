@@ -1,0 +1,60 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #fffef0;
+}
+ 
+.container {
+    max-width: 800px;
+    margin: auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+ 
+#menu .plato {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 10px;
+}
+ 
+#menu .plato .nombre {
+    white-space: nowrap;
+}
+ 
+#menu .plato .dots {
+    overflow: hidden;
+    white-space: nowrap;
+}
+ 
+#menu .plato .dots::before {
+    content: '..............................................................................................................................................................................................................................................................................................................................................................................';
+    letter-spacing: -4px; /* Reduce the space between dots */
+}
+ 
+#menu .plato .precio {
+    white-space: nowrap;
+    justify-self: end;
+}
+ 
+@media (max-width: 600px) {
+    body {
+        padding: 10px;
+    }
+ 
+    .container {
+        padding: 15px;
+    }
+    #menu .plato {
+        grid-template-columns: auto 1fr;
+        gap: 0;
+    }
+ 
+    #menu .plato .dots {
+        display: none;
+    }
+}
