@@ -27,6 +27,7 @@ CREATE TABLE `eskaera` (
   `bezeroa_idBezeroa` int NOT NULL,
   `platerak_idplaterak` int NOT NULL,
   `mahiZenbakia` int DEFAULT NULL,
+  `kopurua` int DEFAULT NULL,
   PRIMARY KEY (`ideskaera`,`bezeroa_idBezeroa`,`platerak_idplaterak`),
   KEY `fk_eskaera_bezeroa1_idx` (`bezeroa_idBezeroa`),
   CONSTRAINT `fk_eskaera_bezeroa1` FOREIGN KEY (`bezeroa_idBezeroa`) REFERENCES `bezeroa` (`idBezeroa`)
@@ -51,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-04-17 13:03:12
+-- Dump completed on 2024-04-17 13:46:40
