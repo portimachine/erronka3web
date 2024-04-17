@@ -102,6 +102,32 @@ INSERT INTO `erreserba` VALUES (1,'unaica','5','10:30','Pendiente'),(2,'unaica',
 UNLOCK TABLES;
 
 --
+-- Table structure for table `eskaera`
+--
+
+DROP TABLE IF EXISTS `eskaera`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `eskaera` (
+  `ideskaera` int NOT NULL,
+  `bezeroa_idBezeroa` int NOT NULL,
+  `mahiZenbakia` int DEFAULT NULL,
+  PRIMARY KEY (`ideskaera`,`bezeroa_idBezeroa`),
+  KEY `fk_eskaera_bezeroa1_idx` (`bezeroa_idBezeroa`),
+  CONSTRAINT `fk_eskaera_bezeroa1` FOREIGN KEY (`bezeroa_idBezeroa`) REFERENCES `bezeroa` (`idBezeroa`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `eskaera`
+--
+
+LOCK TABLES `eskaera` WRITE;
+/*!40000 ALTER TABLE `eskaera` DISABLE KEYS */;
+/*!40000 ALTER TABLE `eskaera` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `hornitzailea`
 --
 
@@ -147,7 +173,6 @@ CREATE TABLE `langilea` (
   `telefonoa` char(9) NOT NULL,
   `banku_zenbakia` varchar(24) NOT NULL,
   `lan_postua` varchar(45) NOT NULL,
-  `salarioa` int NOT NULL,
   `admin` tinyint NOT NULL,
   PRIMARY KEY (`idLangilea`),
   UNIQUE KEY `NAN_UNIQUE` (`idLangilea`)
@@ -160,7 +185,7 @@ CREATE TABLE `langilea` (
 
 LOCK TABLES `langilea` WRITE;
 /*!40000 ALTER TABLE `langilea` DISABLE KEYS */;
-INSERT INTO `langilea` VALUES (1,'12345678Z','Jon','Doe','Garcia','123456789','1234567890','Sukaldaria',1750,1),(2,'23456789Y','Maria','Lopez','Gutierrez','987654321','0987654321','Kamareroa',1250,0),(3,'34567890X','David','Martinez','Sanchez','456789123','4567890123','Kamareroa',1250,0),(4,'45678901W','Laura','Gonzalez','Perez','789123456','7890123456','Sukaldari auxiliarra',1600,1),(5,'56789012V','Carlos','Rodriguez','Alvarez','321654987','3216549870','Anfitrioia',1500,0),(6,'67890123U','Ana','Fernandez','Gomez','654987321','6549870123','Lineako sukaldaria',1780,1),(7,'78901234T','Pedro','Sanchez','Martin','159263478','1592634780','Lavaplatos',1150,0),(8,'89012345S','Elena','Lopez','Garcia','357159246','3571592460','Gerentea',1900,0),(9,'01234567Q','Marcos','Perez','Gutierrez','852741963','8527419630','Akomodadorea',1200,0),(10,'90123456R','Sara','Ruiz','Hernandez','369852147','3698521470','Jatetxeko superbisatzailea',2000,0),(11,'09876543P','Juan','Gomez','Diaz','147258369','1472583690','Kamareroa',1250,0),(12,'98765432O','Luisa','Torres','Vazquez','258369147','2583691470','Kamareroa',1250,0),(13,'65432109L','Roberto','Sanz','Lopez','123789456','1237894560','Anfitrioia',1500,0),(14,'87654321N','Lucia','Diaz','Martinez','789456123','7894561230','Gerentea',1900,0),(15,'76543210M','Javier','Hernandez','Garcia','456123789','4561237890','Sukaldari auxiliarra',1600,1),(16,'54321098K','Patricia','Martin','Rodriguez','987654321','9876543210','Sukaldaria',1750,1),(17,'43210987J','Daniel','Garcia','Fernandez','654123789','6541237890','Lineako sukaldaria',1780,1),(18,'32109876I','Carmen','Alvarez','Ruiz','321789456','3217894560','Kamareroa',1250,0),(19,'21098765H','Alberto','Ruiz','Sanchez','147369258','1473692580','Kamareroa',1250,0),(20,'10987654G','Raquel','Fernandez','Gutierrez','963258741','9632587410','Lavaplatos',1150,0);
+INSERT INTO `langilea` VALUES (1,'12345678Z','Jon','Doe','Garcia','123456789','1234567890','Sukaldaria',1),(2,'23456789Y','Maria','Lopez','Gutierrez','987654321','0987654321','Kamareroa',0),(3,'34567890X','David','Martinez','Sanchez','456789123','4567890123','Kamareroa',0),(4,'45678901W','Laura','Gonzalez','Perez','789123456','7890123456','Sukaldari auxiliarra',1),(5,'56789012V','Carlos','Rodriguez','Alvarez','321654987','3216549870','sukaldarien ikaslea',0),(6,'67890123U','Ana','Fernandez','Gomez','654987321','6549870123','sukaldarien laguntzailea',1),(7,'78901234T','Pedro','Sanchez','Martin','159263478','1592634780','almazeneko morroia',0),(8,'89012345S','Elena','Lopez','Garcia','357159246','3571592460','Gerentea',0),(9,'01234567Q','Marcos','Perez','Gutierrez','852741963','8527419630','fakturatzailea',0),(10,'90123456R','Sara','Ruiz','Hernandez','369852147','3698521470','Jatetxeko superbisatzailea',0),(11,'09876543P','Juan','Gomez','Diaz','147258369','1472583690','Kamareroa',0),(12,'98765432O','Luisa','Torres','Vazquez','258369147','2583691470','Kamareroa',0),(13,'65432109L','Roberto','Sanz','Lopez','123789456','1237894560','sukaldarien ikaslea',0),(14,'87654321N','Lucia','Diaz','Martinez','789456123','7894561230','Gerentea',0),(15,'76543210M','Javier','Hernandez','Garcia','456123789','4561237890','Sukaldari auxiliarra',1),(16,'54321098K','Patricia','Martin','Rodriguez','987654321','9876543210','Sukaldaria',1),(17,'43210987J','Daniel','Garcia','Fernandez','654123789','6541237890','sukaldarien laguntzailea',1),(18,'32109876I','Carmen','Alvarez','Ruiz','321789456','3217894560','Kamareroa',0),(19,'21098765H','Alberto','Ruiz','Sanchez','147369258','1473692580','Kamareroa',0),(20,'10987654G','Raquel','Fernandez','Gutierrez','963258741','9632587410','almazeneko morroia',0);
 /*!40000 ALTER TABLE `langilea` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -228,4 +253,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-04-12 14:48:19
+-- Dump completed on 2024-04-17 12:52:05
